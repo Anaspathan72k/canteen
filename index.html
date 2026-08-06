@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Campus Canteen</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f5f5f5}
+header{background:#ff6b35;color:#fff;padding:15px 30px;display:flex;justify-content:space-between}
+.hero{padding:60px;text-align:center;background:#fff}
+input{padding:10px;width:300px;max-width:90%}
+#menuContainer{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;padding:20px}
+.card{background:#fff;padding:15px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+button{background:#ff6b35;color:#fff;border:none;padding:10px 16px;border-radius:6px;cursor:pointer}
+.cart{background:#fff;margin:20px;padding:20px}
+</style></head>
+<body>
+<header><h2>🍽 Campus Canteen</h2><div>🛒 <span id="cartCount">0</span></div></header>
+<section class="hero"><h1>Fresh Food Everyday</h1><p>Order from your college canteen.</p><input id="search" placeholder="Search..."></section>
+<section><h2 style="padding:20px">Today's Menu</h2><div id="menuContainer"></div></section>
+<section class="cart"><h2>Cart</h2><div id="cartItems">No items selected.</div><h3>Total ₹<span id="totalPrice">0</span></h3></section>
+<script>
+const sample=[{food:"Veg Biryani",price:80},{food:"Burger",price:60},{food:"Coffee",price:20}];
+let cart=[];
+function render(items){
+menuContainer.innerHTML="";
+items.forEach((i,idx)=>{
+menuContainer.innerHTML+=`<div class="card"><h3>${i.food}</h3><p>₹${i.price}</p><button onclick="add(${idx})">Add</button></div>`;
+});
+}
+function add(idx){cart.push(sample[idx]);cartCount.textContent=cart.length;cartItems.innerHTML=cart.map(x=>x.food).join("<br>");totalPrice.textContent=cart.reduce((a,b)=>a+b.price,0);}
+search.oninput=e=>render(sample.filter(x=>x.food.toLowerCase().includes(e.target.value.toLowerCase())));
+render(sample);
+// Replace sample with fetch('YOUR_GOOGLE_APPS_SCRIPT_URL').then(r=>r.json()).then(data=>{sample=data;render(sample);});
+</script></body></html>
