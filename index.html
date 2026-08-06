@@ -15,41 +15,7 @@ button{background:#ff6b35;color:#fff;border:none;padding:10px 16px;border-radius
 <header><h2>🍽 Campus Canteen</h2><div>🛒 <span id="cartCount">0</span></div></header>
 <section class="hero"><h1>Fresh Food Everyday</h1><p>Order from your college canteen.</p><input id="search" placeholder="Search..."></section>
 <section><h2 style="padding:20px">Today's Menu</h2><div id="menuContainer"></div></section>
-function placeOrder() {
 
-    if (cart.length === 0) {
-        alert("Your cart is empty.");
-        return;
-    }
-
-    const order = {
-        studentName: document.getElementById("studentName").value,
-        rollNo: document.getElementById("rollNo").value,
-        items: cart.map(item => item.food).join(", "),
-        total: cart.reduce((sum, item) => sum + item.price, 0)
-    };
-
-    fetch("YOUR_APPS_SCRIPT_URL", {
-        method: "POST",
-        body: JSON.stringify(order)
-    })
-    .then(res => res.text())
-    .then(msg => {
-        alert("Order Placed Successfully!");
-
-        cart = [];
-        cartCount.textContent = 0;
-        cartItems.innerHTML = "No items selected.";
-        totalPrice.textContent = 0;
-
-        document.getElementById("studentName").value = "";
-        document.getElementById("rollNo").value = "";
-    })
-    .catch(err => {
-        console.error(err);
-        alert("Failed to place order.");
-    });
-}
 <script>
 const sample=[{food:"Veg Biryani",price:80},{food:"Burger",price:60},{food:"Coffee",price:20}];
 let cart=[];
