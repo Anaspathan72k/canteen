@@ -27,6 +27,11 @@ menuContainer.innerHTML+=`<div class="card"><h3>${i.food}</h3><p>₹${i.price}</
 }
 function add(idx){cart.push(sample[idx]);cartCount.textContent=cart.length;cartItems.innerHTML=cart.map(x=>x.food).join("<br>");totalPrice.textContent=cart.reduce((a,b)=>a+b.price,0);}
 search.oninput=e=>render(sample.filter(x=>x.food.toLowerCase().includes(e.target.value.toLowerCase())));
-render(sample);
+fetch("https://script.google.com/macros/s/AKfycbyRej5q41BqKe7uwyMWnE4KANPZI8GfxWZWI8a6LCgt3ruwn-uarEMeFL07s_lK8Ld2Bg/exec")
+.then(r => r.json())
+.then(data => {
+    sample = data;
+    render(sample);
+});
 // Replace sample with fetch('YOUR_GOOGLE_APPS_SCRIPT_URL').then(r=>r.json()).then(data=>{sample=data;render(sample);});
 </script></body></html>
